@@ -1,0 +1,49 @@
+:root {
+  /* UI 색상 규칙 (정의서 10) */
+  --color-confirmed: #22c55e;
+  --color-warning: #f59e0b;
+  --color-invalidation: #ef4444;
+  --color-neutral: #6b7280;
+  --color-bg: #0f1419;
+  --color-surface: #1a2332;
+  --color-border: #2d3a4d;
+  --color-text: #e2e8f0;
+  --color-text-muted: #94a3b8;
+  --font-sans: 'Noto Sans KR', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, select {
+  font-family: var(--font-mono);
+}
+
+[data-panel-resize-handle] {
+  background: var(--color-border);
+}
+[data-panel-resize-handle]:hover {
+  background: var(--color-warning);
+}

@@ -1,0 +1,68 @@
+.left-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  min-width: 0;
+}
+
+.panel-title {
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.watchlist-table-wrap {
+  flex: 1;
+  overflow: auto;
+}
+
+.watchlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.watchlist-table th {
+  text-align: left;
+  padding: 6px 8px;
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  position: sticky;
+  top: 0;
+}
+
+.watchlist-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.watchlist-table tbody tr {
+  cursor: pointer;
+}
+
+.watchlist-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.watchlist-table tbody tr.active {
+  background: rgba(245, 158, 11, 0.15);
+}
+
+.watchlist-table .sym {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.watchlist-table .up {
+  color: var(--color-confirmed);
+}
+
+.watchlist-table .down {
+  color: var(--color-invalidation);
+}
