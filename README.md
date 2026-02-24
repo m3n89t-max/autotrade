@@ -44,3 +44,11 @@ API 문서: `http://localhost:8000/docs`
 - `UI개발정의서.MD` – 화면 구성, 상태, 이벤트 흐름
 - `시스템 개발정의서.md` – RAG, Rule DSL, Rule Review, 엔진 연동
 - `docs/TRADINGVIEW-SETUP.md` – TradingView Charting Library 설치 및 UDF 연동
+
+## Web Trading Interface (Under Development)
+
+- Integrated AI-assisted trading dashboard
+- Custom datafeed architecture
+- Real-time WebSocket streaming
+- TradingView Charting Library integration (UDF datafeed)
+- Automated execution engine
