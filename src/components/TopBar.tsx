@@ -22,6 +22,10 @@ export function TopBar() {
   return (
     <header className="topbar">
       <div className="topbar-left">
+        <div className="topbar-brand" title="AUTOTRADE">
+          <h1 className="topbar-brand-title">AUTOTRADE</h1>
+          <p className="topbar-brand-desc">Private AI-based crypto futures research tool. Using Binance API data for internal analysis. Integration of TradingView Advanced Charts for visualization.</p>
+        </div>
         <div className="topbar-item symbol-search" title="TB-SYMBOL">
           <Search size={16} />
           <input
