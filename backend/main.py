@@ -6,7 +6,7 @@ UI개발정의서 / 시스템개발정의서 참조
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api import health, wave, econ, chat, rules, rag, market
+from api import health, wave, econ, chat, rules, rag, market, udf
 import config  # noqa: F401 – .env 로드
 
 app = FastAPI(title="AUTOTRADE API", version="1.0.0")
@@ -26,6 +26,7 @@ app.include_router(chat.router, prefix="/api/chat", tags=["chat"])
 app.include_router(rules.router, prefix="/api/rules", tags=["rules"])
 app.include_router(rag.router, prefix="/api/rag", tags=["rag"])
 app.include_router(market.router, prefix="/api/market", tags=["market"])
+app.include_router(udf.router, prefix="/api", tags=["udf"])
 
 
 @app.get("/")

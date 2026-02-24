@@ -1,0 +1,9 @@
+# 서버 + 차트/API만 사용할 때 (Build Tools 불필요)
+# RAG/OCR은 나중에 requirements.txt 로 설치
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+python-multipart==0.0.17
+pydantic==2.10.2
+pydantic-settings==2.6.1
+python-dotenv==1.0.1
+websockets==14.1

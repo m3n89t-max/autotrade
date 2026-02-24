@@ -7,7 +7,7 @@
 - **프론트엔드**: React + TypeScript + Vite (UI개발정의서)
 - **백엔드**: FastAPI (시스템개발정의서 – RAG + Rule DB)
 - **상태**: Zustand (appState)
-- **차트**: lightweight-charts
+- **차트**: TradingView Charting Library (UDF) / Lightweight Charts
 - **레이아웃**: 리사이즈 가능 패널 (react-resizable-panels)
 
 ## UI 구성
@@ -43,3 +43,4 @@ API 문서: `http://localhost:8000/docs`
 
 - `UI개발정의서.MD` – 화면 구성, 상태, 이벤트 흐름
 - `시스템 개발정의서.md` – RAG, Rule DSL, Rule Review, 엔진 연동
+- `docs/TRADINGVIEW-SETUP.md` – TradingView Charting Library 설치 및 UDF 연동
