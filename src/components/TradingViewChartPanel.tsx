@@ -39,7 +39,7 @@ declare global {
 
 export function TradingViewChartPanel() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const widgetRef = useRef<ReturnType<Window['TradingView']['widget']> | null>(null)
+  const widgetRef = useRef<{ remove?: () => void } | null>(null)
   const [error, setError] = useState<string | null>(null)
   const { symbol, timeframe } = useAppStore()
 

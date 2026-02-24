@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useAppStore } from '@/store/useAppStore'
 
 export function OrderEntry() {
-  const { symbol, ui } = useAppStore()
+  const { ui } = useAppStore()
   const [side, setSide] = useState<'Long' | 'Short'>('Long')
   const [orderType, setOrderType] = useState<'Market' | 'Limit' | 'Stop'>('Market')
   const [qty, setQty] = useState('')

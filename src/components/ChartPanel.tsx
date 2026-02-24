@@ -1,6 +1,6 @@
 /** UI개발정의서 §5 – 캔들, RSI, 엘리어트 파동(5파동/ABC/ABCDE), 피보나치 되돌림. 트레이딩뷰 스타일 레이아웃 */
 import { useRef, useEffect, useState, useCallback } from 'react'
-import { createChart, type IChartApi, type IPriceLine } from 'lightweight-charts'
+import { createChart, type IChartApi, type IPriceLine, type UTCTimestamp } from 'lightweight-charts'
 import { Camera, ToggleLeft, MessageSquare, Minus, Trash2, ExternalLink, MousePointer2 } from 'lucide-react'
 import { useAppStore } from '@/store/useAppStore'
 import type { Timeframe } from '@/types/app'
@@ -122,10 +122,10 @@ export function ChartPanel() {
         priceLineVisible: false,
         lastValueVisible: false,
       })
-      line.setData(points)
+      line.setData(points.map((p) => ({ time: p.time as UTCTimestamp, value: p.value })))
       line.setMarkers(
         points.map((p, i) => ({
-          time: p.time,
+          time: p.time as UTCTimestamp,
           position: 'belowBar' as const,
           shape: 'circle' as const,
           color: '#a855f7',
@@ -173,10 +173,10 @@ export function ChartPanel() {
         candleSeriesRef.current = candle
 
         const vol = chart.addHistogramSeries({ priceFormat: { type: 'volume' } })
-        candle.setData(rows.map((r) => ({ time: r.time, open: r.open, high: r.high, low: r.low, close: r.close })))
+        candle.setData(rows.map((r) => ({ time: r.time as UTCTimestamp, open: r.open, high: r.high, low: r.low, close: r.close })))
         vol.setData(
           rows.map((r) => ({
-            time: r.time,
+            time: r.time as UTCTimestamp,
             value: r.volume,
             color: r.close >= r.open ? '#22c55e' : '#ef4444',
           }))
@@ -202,8 +202,8 @@ export function ChartPanel() {
           const closes = rows.map((r) => r.close)
           const rsiValues = calcRSI(closes, RSI_PERIOD)
           const rsiData = rows
-            .map((r, i) => (rsiValues[i] != null ? { time: r.time, value: rsiValues[i] as number } : null))
-            .filter((x): x is { time: number; value: number } => x != null)
+            .map((r, i) => (rsiValues[i] != null ? { time: r.time as UTCTimestamp, value: rsiValues[i] as number } : null))
+            .filter((x): x is { time: UTCTimestamp; value: number } => x != null)
 
           const rsiChart = createChart(rsiChartRef.current, {
             layout: { background: { color: '#1a2332' }, textColor: '#94a3b8' },
@@ -275,14 +275,17 @@ export function ChartPanel() {
 
   const getClickTimePrice = useCallback(
     (e: React.MouseEvent<HTMLDivElement>): { time: number; value: number } | null => {
-      if (!chartApi.current || !chartRef.current) return null
+      if (!chartApi.current || !chartRef.current || !candleSeriesRef.current) return null
       const rect = chartRef.current.getBoundingClientRect()
       const x = e.clientX - rect.left
       const y = e.clientY - rect.top
-      const time = chartApi.current.timeScale().coordinateToTime(x) as number
-      const price = chartApi.current.priceScale('right').coordinateToPrice(y) as number
-      if (time == null || price == null || !isFinite(time) || !isFinite(price)) return null
-      return { time: Math.round(time), value: price }
+      const time = chartApi.current.timeScale().coordinateToTime(x)
+      const price = candleSeriesRef.current.coordinateToPrice(y)
+      if (time == null || price == null) return null
+      const t = typeof time === 'number' ? time : Number(time)
+      const p = typeof price === 'number' ? price : Number(price)
+      if (!isFinite(t) || !isFinite(p)) return null
+      return { time: Math.round(t), value: p }
     },
     []
   )
